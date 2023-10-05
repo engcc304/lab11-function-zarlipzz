@@ -25,10 +25,42 @@
 */
 
 #include <stdio.h>
+#include <math.h>
+
+int countDigits(int number) {
+    int count = 0;
+    while (number != 0) {
+        number /= 10;
+        count++;
+    }
+    return count;
+}
+
+int isArmstrongNumber(int number) {
+    int originalNumber = number;
+    int numDigits = countDigits(number);
+    int armstrongSum = 0;
+
+    while (number != 0) {
+        int digit = number % 10;
+        armstrongSum += pow(digit, numDigits);
+        number /= 10;
+    }
+
+    return armstrongSum == originalNumber;
+}
 
 int main() {
+    int userNumber;
+    printf("Enter Number: ");
+    scanf("%d", &userNumber);
 
-    //--| YOUR CODE HERE
+    if (isArmstrongNumber(userNumber)) {
+        printf("Pass.\n");
+    } else {
+        printf("Not Pass.\n");
+    }
 
-    return 0 ;
-}//end main function
+    return 0;
+}
+//end main function
